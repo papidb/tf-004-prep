@@ -9,3 +9,10 @@ terraform {
     }
   }
 }
+
+# provider "random" {
+# }
+
+provider "random" {
+  alias = "alt"
+}
