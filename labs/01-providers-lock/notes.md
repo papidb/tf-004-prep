@@ -60,8 +60,33 @@ Constrains the **rightmost** version segment.
 - **Provider lock** (`.terraform.lock.hcl`): reproducible provider versions + hashes; committed to VCS; persistent.
 - **State lock**: concurrency control enforced by the backend; ephemeral (held only during an operation); shines with remote backends.
 
+### Passing aliased providers into child modules (extension lab)
+Child modules have their OWN `terraform { required_providers {} }` block — each module declares its own dependency contract.
+
+Two halves (parameter / argument):
+- **Child declares the slot** — `configuration_aliases = [random.alt]` inside the child's `required_providers`. This is a PARAMETER: "I expect an aliased config passed in, called random.alt internally." It is NOT a provider configuration.
+- **Root fills the slot** — `providers = { random.alt = random.alt }` on the `module` block. ARGUMENT at the call site.
+  - Map rule: **key = what the child expects, value = what the root provides.**
+  - Trap: `{ random = random.alt }` is wrong; child declared `random.alt`, so key must be `random.alt`.
+
+Inheritance asymmetry (repeats the root-level rule at the module boundary):
+- Default (unaliased) config → inherited by child IMPLICITLY.
+- Aliased config → NEVER implicit; must be passed via `providers` map.
+
+Meta-argument singular vs plural (exam trap):
+- `provider  = aws.west`  → **resource** meta-argument (one resource picks a config).
+- `providers = { ... }`   → **module** meta-argument (map wiring root configs into a child).
+
+Module resource addressing: `module.<name>.<type>.<name>` e.g. `module.dog.random_pet.module_pet`.
+
+Removing `configuration_aliases` while root still passes the provider:
+- Produces a WARNING ("Reference to undefined provider"), not an error — legacy backward-compat leniency; Terraform guesses the source. Points at the root (the reference site); fix is in the child (re-add configuration_aliases).
+- Contrast: undeclared alias at ROOT level = hard ERROR ("Provider configuration not present").
+
 ## Teach-back completed
 - Required provider vs provider configuration ✓ (after correction)
 - Version constraint vs lock selection ✓
 - Provider lock vs state lock ✓
 - Default omission vs mandatory alias declaration ✓
+- providers map vs configuration_aliases (argument vs parameter) ✓
+- Why removing configuration_aliases warns instead of errors ✓
