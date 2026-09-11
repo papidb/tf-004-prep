@@ -8,10 +8,10 @@
 
 A team provisions identical test environments every week. Manual tickets produce inconsistent settings. Which Terraform benefit most directly addresses this?
 
-A. Declarative, version-controlled configuration
-B. Automatic elimination of every outage
-C. A provider-independent state format
-D. Permanent cloud credentials
+A. Permanent cloud credentials
+B. A provider-independent state format
+C. Automatic elimination of every outage
+D. Declarative, version-controlled configuration
 
 <details><summary>Answer and rationale</summary>
 
@@ -27,8 +27,8 @@ Configuration can be reviewed, reused, and applied consistently. Terraform reduc
 
 Terraform configuration normally describes the desired end state rather than a sequence of API calls that the author must order manually.
 
-A. True
-B. False
+A. False
+B. True
 
 <details><summary>Answer and rationale</summary>
 
@@ -45,8 +45,8 @@ Terraform is declarative. Providers translate the desired configuration into API
 An engineer changes an instance size in code and wants to know the proposed consequences before changing production. Which IaC capability is being used?
 
 A. Execution planning
-B. State locking
-C. Provider aliasing
+B. Provider aliasing
+C. State locking
 D. Module publishing
 
 <details><summary>Answer and rationale</summary>
@@ -64,9 +64,9 @@ A Terraform plan previews the actions needed to reconcile configuration, state, 
 Which two practices become easier when infrastructure is represented as code?
 
 A. Peer review through version control
-B. Reproducing an environment from a known revision
+B. Keeping secrets permanently out of state
 C. Avoiding all provider APIs
-D. Keeping secrets permanently out of state
+D. Reproducing an environment from a known revision
 
 <details><summary>Answer and rationale</summary>
 
@@ -82,10 +82,10 @@ Code can be reviewed and versioned. IaC still calls provider APIs, and ordinary 
 
 A company uses AWS and GitHub. Why can one Terraform workflow manage both?
 
-A. Providers expose each platform's API resources to Terraform
-B. Terraform converts both platforms into the same API
-C. State replaces authentication
-D. Backends install cloud SDKs
+A. Terraform converts both platforms into the same API
+B. State replaces authentication
+C. Backends install cloud SDKs
+D. Providers expose each platform's API resources to Terraform
 
 <details><summary>Answer and rationale</summary>
 
@@ -118,10 +118,10 @@ Out-of-band changes can still create drift. Terraform detects differences during
 
 Which sequence best represents Terraform's core workflow?
 
-A. Write, plan, apply
-B. Apply, import, format
-C. Init, destroy, write
-D. Validate, publish, unlock
+A. Apply, import, format
+B. Validate, publish, unlock
+C. Write, plan, apply
+D. Init, destroy, write
 
 <details><summary>Answer and rationale</summary>
 
@@ -139,9 +139,9 @@ The core workflow is write configuration, review a plan, then apply it. Initiali
 
 A configuration uses hashicorp/aws. Where should its source address and acceptable versions be declared?
 
-A. terraform.required_providers
+A. backend
 B. provider.aws
-C. backend
+C. terraform.required_providers
 D. locals
 
 <details><summary>Answer and rationale</summary>
@@ -158,9 +158,9 @@ The required_providers block declares each provider's local name, source address
 
 Where are an AWS region and an alias for a second region normally configured?
 
-A. provider blocks
-B. required_providers
-C. output blocks
+A. required_providers
+B. output blocks
+C. provider blocks
 D. the lock file
 
 <details><summary>Answer and rationale</summary>
@@ -177,8 +177,8 @@ Provider blocks configure provider-specific settings. required_providers declare
 
 A repository was freshly cloned and has no .terraform directory. Which command installs required provider plugins?
 
-A. terraform init
-B. terraform validate
+A. terraform validate
+B. terraform init
 C. terraform providers lock
 D. terraform apply
 
@@ -215,10 +215,10 @@ Define a default provider configuration and an aliased configuration, then selec
 
 A resource must use the aliased provider aws.west. Which resource meta-argument selects it?
 
-A. provider = aws.west
-B. source = aws.west
-C. alias = west
-D. providers = aws.west
+A. alias = west
+B. providers = aws.west
+C. provider = aws.west
+D. source = aws.west
 
 <details><summary>Answer and rationale</summary>
 
@@ -234,9 +234,9 @@ Resources select a non-default provider configuration with the provider meta-arg
 
 What does .terraform.lock.hcl record?
 
-A. Selected provider versions
+A. Remote module version selections
 B. Provider checksums
-C. Remote module version selections
+C. Selected provider versions
 D. Current resource attributes
 
 <details><summary>Answer and rationale</summary>
@@ -253,8 +253,8 @@ The dependency lock file tracks provider selections and checksums. It does not t
 
 A team should usually commit .terraform.lock.hcl to version control.
 
-A. True
-B. False
+A. False
+B. True
 
 <details><summary>Answer and rationale</summary>
 
@@ -271,8 +271,8 @@ Committing the lock file lets future runs use reviewed provider selections and v
 The configuration permits AWS provider versions >= 5.0 and < 6.0, but the lock file selects 5.42. What does a normal terraform init prefer?
 
 A. 5.42 if it still satisfies the constraint
-B. The newest 5.x version every time
-C. 6.0
+B. 6.0
+C. The newest 5.x version every time
 D. No provider because constraints and locks conflict
 
 <details><summary>Answer and rationale</summary>
@@ -289,10 +289,10 @@ Terraform honors the existing locked selection when it remains compatible. Use i
 
 Which command asks Terraform to disregard existing provider selections and choose newer versions allowed by the constraints?
 
-A. terraform init -upgrade
-B. terraform apply -refresh-only
+A. terraform apply -refresh-only
+B. terraform state replace-provider
 C. terraform providers mirror
-D. terraform state replace-provider
+D. terraform init -upgrade
 
 <details><summary>Answer and rationale</summary>
 
@@ -308,9 +308,9 @@ The -upgrade option ignores previous provider selections in the lock file while 
 
 Why does Terraform maintain state for a managed resource?
 
-A. To map a configuration address to a remote object and retain needed metadata
-B. To replace provider authentication
-C. To store only comments from configuration
+A. To store only comments from configuration
+B. To map a configuration address to a remote object and retain needed metadata
+C. To replace provider authentication
 D. To guarantee that remote objects cannot change
 
 <details><summary>Answer and rationale</summary>
@@ -345,9 +345,9 @@ Sensitive controls redaction in normal UI output. Unless the value is also ephem
 A child module should use the root module's aws.west configuration. Which module meta-argument explicitly maps it?
 
 A. providers
-B. provider
+B. depends_on
 C. required_providers
-D. depends_on
+D. provider
 
 <details><summary>Answer and rationale</summary>
 
@@ -363,9 +363,9 @@ A module call can pass provider configurations with its providers map, for examp
 
 Which command displays the provider requirements detected across the current configuration and its modules?
 
-A. terraform providers
+A. terraform output
 B. terraform show
-C. terraform output
+C. terraform providers
 D. terraform console
 
 <details><summary>Answer and rationale</summary>
@@ -402,9 +402,9 @@ Provider configuration must be available for operations that occur before resour
 A working directory contains configuration but has never been initialized. Which command should run before plan or apply?
 
 A. terraform init
-B. terraform fmt
+B. terraform login
 C. terraform state pull
-D. terraform login
+D. terraform fmt
 
 <details><summary>Answer and rationale</summary>
 
@@ -420,8 +420,8 @@ Initialization prepares the working directory, backend, child modules, and provi
 
 It is safe to run terraform init more than once in the same working directory.
 
-A. True
-B. False
+A. False
+B. True
 
 <details><summary>Answer and rationale</summary>
 
@@ -437,10 +437,10 @@ Initialization is designed to be idempotent and can be repeated when dependencie
 
 A backend configuration changed and existing state must be copied to the new backend. Which initialization option is intended for that?
 
-A. -migrate-state
-B. -backend=false
+A. -backend=false
+B. -upgrade
 C. -get=false
-D. -upgrade
+D. -migrate-state
 
 <details><summary>Answer and rationale</summary>
 
@@ -456,10 +456,10 @@ terraform init -migrate-state attempts to copy existing state to the newly confi
 
 A reusable child module needs a syntax and internal-consistency check without accessing a configured backend. Which sequence is appropriate?
 
-A. terraform init -backend=false, then terraform validate
-B. terraform apply -refresh-only
-C. terraform state list, then terraform fmt
-D. terraform import, then terraform test
+A. terraform state list, then terraform fmt
+B. terraform init -backend=false, then terraform validate
+C. terraform import, then terraform test
+D. terraform apply -refresh-only
 
 <details><summary>Answer and rationale</summary>
 
@@ -475,10 +475,10 @@ Validation needs installed modules/providers but not a backend. A backend-free i
 
 What does terraform validate check?
 
-A. Configuration syntax
-B. Internal argument and reference consistency
-C. Whether cloud credentials can create every resource
-D. Whether the proposed changes are acceptable
+A. Whether the proposed changes are acceptable
+B. Whether cloud credentials can create every resource
+C. Configuration syntax
+D. Internal argument and reference consistency
 
 <details><summary>Answer and rationale</summary>
 
@@ -511,10 +511,10 @@ Planning reads current remote objects by default, updates Terraform's view, and 
 
 A plan was run without -out. What kind of plan is it?
 
-A. Speculative and not guaranteed to be the exact plan later applied
-B. Saved and immutable
-C. Refresh-only
-D. Destroy mode
+A. Saved and immutable
+B. Destroy mode
+C. Speculative and not guaranteed to be the exact plan later applied
+D. Refresh-only
 
 <details><summary>Answer and rationale</summary>
 
@@ -531,9 +531,9 @@ Without -out, plan is for review. A later apply creates a fresh plan unless give
 A CI job must apply exactly the reviewed plan. Which workflow fits?
 
 A. terraform plan -out=tfplan, then terraform apply tfplan
-B. terraform plan, then terraform apply -refresh-only
-C. terraform validate, then terraform apply -target=all
-D. terraform show, then terraform apply -upgrade
+B. terraform show, then terraform apply -upgrade
+C. terraform plan, then terraform apply -refresh-only
+D. terraform validate, then terraform apply -target=all
 
 <details><summary>Answer and rationale</summary>
 
@@ -550,9 +550,9 @@ A saved plan can be passed to apply so Terraform executes those recorded actions
 terraform apply is run without a saved-plan argument. What happens first?
 
 A. Terraform creates a new plan and asks for approval
-B. Terraform applies the last speculative plan
+B. Terraform only updates state
 C. Terraform skips refresh
-D. Terraform only updates state
+D. Terraform applies the last speculative plan
 
 <details><summary>Answer and rationale</summary>
 
@@ -568,10 +568,10 @@ Automatic plan mode creates a plan, presents it, and requests approval unless an
 
 Which command removes all managed objects described by the current configuration?
 
-A. terraform destroy
-B. terraform state rm '*'
-C. terraform fmt -recursive
-D. terraform init -reconfigure
+A. terraform fmt -recursive
+B. terraform init -reconfigure
+C. terraform state rm '*'
+D. terraform destroy
 
 <details><summary>Answer and rationale</summary>
 
@@ -587,10 +587,10 @@ terraform destroy is a convenience alias for terraform apply -destroy. State rem
 
 CI should fail if any Terraform file is not canonically formatted, without rewriting files. Which command is suitable?
 
-A. terraform fmt -check -recursive
-B. terraform validate -json
+A. terraform validate -json
+B. terraform show -json
 C. terraform plan -detailed-exitcode
-D. terraform show -json
+D. terraform fmt -check -recursive
 
 <details><summary>Answer and rationale</summary>
 
@@ -606,10 +606,10 @@ fmt -check checks formatting, and -recursive includes subdirectories.
 
 A team wants state to accept out-of-band changes without modifying remote resources. Which planning mode proposes only state reconciliation?
 
-A. terraform plan -refresh-only
+A. terraform state push
 B. terraform plan -destroy
 C. terraform plan -target
-D. terraform state push
+D. terraform plan -refresh-only
 
 <details><summary>Answer and rationale</summary>
 
@@ -626,8 +626,8 @@ Refresh-only mode proposes updates to state and root outputs to match remote obj
 One unhealthy instance should be replaced even though its arguments have not changed. Which planning option expresses that intent?
 
 A. -replace=ADDRESS
-B. -target=ADDRESS
-C. -refresh=false
+B. -refresh=false
+C. -target=ADDRESS
 D. -lock=false
 
 <details><summary>Answer and rationale</summary>
@@ -644,8 +644,8 @@ The -replace option requests replacement of a specific resource instance in the 
 
 Routine use of -target is recommended as the normal way to apply each resource separately.
 
-A. True
-B. False
+A. False
+B. True
 
 <details><summary>Answer and rationale</summary>
 
@@ -661,10 +661,10 @@ Resource targeting is intended for exceptional recovery or troubleshooting. Norm
 
 A CI job uses terraform plan -detailed-exitcode. Which exit code means the plan succeeded and contains changes?
 
-A. 2
-B. 0
-C. 1
-D. 3
+A. 1
+B. 3
+C. 2
+D. 0
 
 <details><summary>Answer and rationale</summary>
 
@@ -680,10 +680,10 @@ With detailed exit codes, 0 means success with no changes, 1 means error, and 2 
 
 What is the most direct effect of -auto-approve in automatic apply mode?
 
-A. It skips the interactive approval prompt
-B. It disables state locking
-C. It validates cloud permissions
-D. It saves the plan to disk
+A. It validates cloud permissions
+B. It saves the plan to disk
+C. It disables state locking
+D. It skips the interactive approval prompt
 
 <details><summary>Answer and rationale</summary>
 
@@ -701,10 +701,10 @@ D. It saves the plan to disk
 
 Configuration declares resource "aws_instance" "web". What is its address when neither count nor for_each is used?
 
-A. aws_instance.web
-B. resource.aws_instance.web
-C. aws.web.instance
-D. module.aws_instance.web
+A. resource.aws_instance.web
+B. module.aws_instance.web
+C. aws_instance.web
+D. aws.web.instance
 
 <details><summary>Answer and rationale</summary>
 
@@ -720,10 +720,10 @@ A managed resource address combines resource type and local name.
 
 A team needs the ID of an existing VPC without asking Terraform to manage its lifecycle. Which block type fits?
 
-A. data
-B. resource
-C. moved
-D. terraform
+A. resource
+B. data
+C. terraform
+D. moved
 
 <details><summary>Answer and rationale</summary>
 
@@ -739,10 +739,10 @@ A data source reads information from a provider without declaring that Terraform
 
 A subnet argument uses aws_vpc.main.id. What dependency behavior does Terraform infer?
 
-A. The VPC must be handled before the subnet
+A. A manual depends_on is always required
 B. No dependency because references are only strings
 C. The subnet must exist first
-D. A manual depends_on is always required
+D. The VPC must be handled before the subnet
 
 <details><summary>Answer and rationale</summary>
 
@@ -758,10 +758,10 @@ A resource reference creates an implicit dependency that Terraform uses to order
 
 Two resources have a behavioral dependency but exchange no data. Which meta-argument can declare it explicitly?
 
-A. depends_on
+A. lifecycle.ignore_changes
 B. provider
 C. count
-D. lifecycle.ignore_changes
+D. depends_on
 
 <details><summary>Answer and rationale</summary>
 
@@ -778,8 +778,8 @@ depends_on records a dependency Terraform cannot infer from expression reference
 Instances created with count need the second instance's address. Which syntax is correct?
 
 A. aws_instance.web[1]
-B. aws_instance.web[2]
-C. aws_instance.web.second
+B. aws_instance.web.second
+C. aws_instance.web[2]
 D. aws_instance.web["1"]
 
 <details><summary>Answer and rationale</summary>
@@ -797,9 +797,9 @@ count instances use zero-based numeric indices.
 A resource uses for_each = {blue = ..., green = ...}. How is the blue instance addressed?
 
 A. resource_type.name["blue"]
-B. resource_type.name[0]
-C. resource_type.blue
-D. resource_type.name.blue.value
+B. resource_type.name.blue.value
+C. resource_type.name[0]
+D. resource_type.blue
 
 <details><summary>Answer and rationale</summary>
 
@@ -815,10 +815,10 @@ for_each instances use string keys in their addresses.
 
 Stable server names may be added and removed independently. Which repetition mechanism usually avoids index shifting?
 
-A. for_each with stable keys
+A. a provider alias
 B. count based on list length
-C. a dynamic block
-D. a provider alias
+C. for_each with stable keys
+D. a dynamic block
 
 <details><summary>Answer and rationale</summary>
 
@@ -834,9 +834,9 @@ Stable map or set keys give each instance an identity that does not depend on li
 
 Which expression chooses "large" only when var.environment equals "prod"?
 
-A. var.environment == "prod" ? "large" : "small"
-B. if var.environment then "large"
-C. var.environment && "large"
+A. var.environment && "large"
+B. var.environment == "prod" ? "large" : "small"
+C. if var.environment then "large"
 D. choose(var.environment, "large")
 
 <details><summary>Answer and rationale</summary>
@@ -853,9 +853,9 @@ Terraform conditional expressions use condition ? true_value : false_value.
 
 Repeated nested blocks must be generated from a collection inside a resource. Which construct is intended for that?
 
-A. dynamic block
-B. locals block
-C. output block
+A. output block
+B. dynamic block
+C. locals block
 D. terraform block
 
 <details><summary>Answer and rationale</summary>
@@ -874,8 +874,8 @@ An expression is repeated across several resources but is not an input from call
 
 A. locals
 B. variable
-C. output
-D. required_providers
+C. required_providers
+D. output
 
 <details><summary>Answer and rationale</summary>
 
@@ -891,8 +891,8 @@ Local values name expressions for reuse within a module. Input variables are par
 
 No value is supplied for an input variable that has a default. What value does Terraform use?
 
-A. The declared default
-B. null in every case
+A. null in every case
+B. The declared default
 C. An empty string
 D. The provider's default
 
@@ -911,9 +911,9 @@ A variable default makes the input optional and is used when no higher-precedenc
 The same variable is set by TF_VAR_region and terraform.tfvars. Which value wins in a local CLI run?
 
 A. terraform.tfvars
-B. TF_VAR_region
-C. The variable default
-D. The provider region
+B. The provider region
+C. TF_VAR_region
+D. The variable default
 
 <details><summary>Answer and rationale</summary>
 
@@ -929,10 +929,10 @@ Environment variables have lower precedence than terraform.tfvars and auto-loade
 
 The same variable appears in terraform.tfvars and prod.auto.tfvars. Which takes precedence?
 
-A. prod.auto.tfvars
-B. terraform.tfvars
-C. Whichever file is larger
-D. Terraform reports a duplicate-definition error
+A. terraform.tfvars
+B. prod.auto.tfvars
+C. Terraform reports a duplicate-definition error
+D. Whichever file is larger
 
 <details><summary>Answer and rationale</summary>
 
@@ -948,10 +948,10 @@ Automatically loaded *.auto.tfvars files are processed after terraform.tfvars; l
 
 A CLI run uses -var-file=base.tfvars and then -var-file=prod.tfvars, both setting instance_type. Which wins?
 
-A. prod.tfvars
-B. base.tfvars
+A. base.tfvars
+B. The variable default
 C. terraform.tfvars regardless
-D. The variable default
+D. prod.tfvars
 
 <details><summary>Answer and rationale</summary>
 
@@ -967,9 +967,9 @@ CLI variable options are processed in order, and the later assignment takes prec
 
 In local CLI execution, which listed source normally has the highest precedence?
 
-A. The last -var or -var-file argument
-B. terraform.tfvars
-C. TF_VAR_name
+A. terraform.tfvars
+B. TF_VAR_name
+C. The last -var or -var-file argument
 D. The variable default
 
 <details><summary>Answer and rationale</summary>
@@ -986,9 +986,9 @@ CLI options have higher precedence than automatically loaded files, environment 
 
 A variable has type set(string) and receives duplicate values. What collection property should the author expect?
 
-A. Duplicates are removed and ordering is not significant
+A. Values become map keys with null values
 B. Duplicates and original ordering are preserved
-C. Values become map keys with null values
+C. Duplicates are removed and ordering is not significant
 D. The input always fails conversion
 
 <details><summary>Answer and rationale</summary>
@@ -1007,8 +1007,8 @@ A module input requires object({name=string, ports=set(number)}). What does this
 
 A. A documented shape and validation by Terraform's type system
 B. Automatic provider installation
-C. State encryption
-D. A guaranteed non-null value
+C. A guaranteed non-null value
+D. State encryption
 
 <details><summary>Answer and rationale</summary>
 
@@ -1024,10 +1024,10 @@ Specific type constraints define the accepted structure and permit safe attribut
 
 A root output contains a password and is marked sensitive = true. What does Terraform do?
 
-A. Redacts it in normal CLI/UI output but may store it in state
-B. Omits it from state
-C. Hashes it before passing it to modules
-D. Prevents providers from receiving it
+A. Omits it from state
+B. Prevents providers from receiving it
+C. Redacts it in normal CLI/UI output but may store it in state
+D. Hashes it before passing it to modules
 
 <details><summary>Answer and rationale</summary>
 
@@ -1043,10 +1043,10 @@ Sensitive is a display-protection mechanism, not state omission or encryption.
 
 Operators want Terraform runs to use scoped AWS credentials that expire instead of distributing long-lived keys to every engineer. Which Vault pattern addresses this?
 
-A. Use a Vault secrets engine to generate short-lived dynamic credentials
-B. Commit static keys in a sensitive variable
-C. Store keys in the provider dependency lock file
-D. Use terraform state rm after every run
+A. Use terraform state rm after every run
+B. Store keys in the provider dependency lock file
+C. Use a Vault secrets engine to generate short-lived dynamic credentials
+D. Commit static keys in a sensitive variable
 
 <details><summary>Answer and rationale</summary>
 
@@ -1062,10 +1062,10 @@ Vault can generate scoped, leased credentials for a run, reducing the number and
 
 A resource name must be unique, but replacement should be created before the old object is destroyed. Which lifecycle rule expresses that ordering?
 
-A. create_before_destroy
-B. prevent_destroy
-C. ignore_changes
-D. replace_triggered_by
+A. ignore_changes
+B. replace_triggered_by
+C. prevent_destroy
+D. create_before_destroy
 
 <details><summary>Answer and rationale</summary>
 
@@ -1098,10 +1098,10 @@ The rule is present only while the resource block remains in configuration. Remo
 
 A platform automatically updates a resource tag, and Terraform should not revert that tag while still managing the resource. Which rule may be appropriate?
 
-A. ignore_changes for that attribute
+A. replace_triggered_by
 B. prevent_destroy
-C. create_before_destroy
-D. replace_triggered_by
+C. ignore_changes for that attribute
+D. create_before_destroy
 
 <details><summary>Answer and rationale</summary>
 
@@ -1117,10 +1117,10 @@ ignore_changes tells Terraform to ignore selected attribute differences during u
 
 A resource should be replaced whenever another managed resource is replaced, even though no argument value changes. Which lifecycle feature is intended?
 
-A. replace_triggered_by
-B. depends_on
-C. ignore_changes
-D. precondition
+A. depends_on
+B. ignore_changes
+C. precondition
+D. replace_triggered_by
 
 <details><summary>Answer and rationale</summary>
 
@@ -1136,8 +1136,8 @@ replace_triggered_by adds replacement triggers based on managed resource or attr
 
 Lifecycle rule arguments can freely use values that are unknown until apply.
 
-A. True
-B. False
+A. False
+B. True
 
 <details><summary>Answer and rationale</summary>
 
@@ -1153,10 +1153,10 @@ Terraform processes lifecycle settings early, so only literal values can be used
 
 An input variable must reject any CIDR that is not a /32 before planning proceeds. Which construct belongs in the variable block?
 
-A. validation
-B. postcondition
-C. check
-D. depends_on
+A. check
+B. depends_on
+C. validation
+D. postcondition
 
 <details><summary>Answer and rationale</summary>
 
@@ -1172,10 +1172,10 @@ Custom variable validation checks an input value and returns an error when its c
 
 A resource must not be created unless an AMI architecture matches the requested instance architecture. Which condition is best placed before the resource operation?
 
-A. precondition
-B. postcondition
-C. check
-D. output sensitive
+A. output sensitive
+B. check
+C. precondition
+D. postcondition
 
 <details><summary>Answer and rationale</summary>
 
@@ -1191,10 +1191,10 @@ A precondition is evaluated before the resource operation and can block planning
 
 After creating a service, its returned endpoint must use HTTPS or downstream resources must not proceed. Which construct fits?
 
-A. postcondition
+A. provider alias
 B. variable validation
-C. ignore_changes
-D. provider alias
+C. postcondition
+D. ignore_changes
 
 <details><summary>Answer and rationale</summary>
 
@@ -1210,10 +1210,10 @@ A postcondition validates a resource or data-source result after planning/applyi
 
 A production health assertion should run at the end of plan/apply but report a warning rather than block infrastructure changes. Which construct fits?
 
-A. check block
-B. precondition
-C. postcondition
-D. variable validation
+A. postcondition
+B. variable validation
+C. precondition
+D. check block
 
 <details><summary>Answer and rationale</summary>
 
@@ -1229,10 +1229,10 @@ Check blocks run as the final validation step and report warnings without blocki
 
 A short-lived token must be available during a run but omitted from state and plan. Which variable setting introduced for this purpose is appropriate?
 
-A. ephemeral = true
+A. description = "secret"
 B. sensitive = true only
 C. nullable = false
-D. description = "secret"
+D. ephemeral = true
 
 <details><summary>Answer and rationale</summary>
 
@@ -1248,10 +1248,10 @@ Ephemeral values are available during an operation but omitted from state and pl
 
 A provider resource exposes password_wo. What distinguishes a write-only argument?
 
-A. Terraform passes it for the current operation and does not persist it in state or plan
-B. It can only be set through TF_VAR
-C. It is readable from terraform output
-D. Terraform encrypts and persists it
+A. It can only be set through TF_VAR
+B. Terraform encrypts and persists it
+C. Terraform passes it for the current operation and does not persist it in state or plan
+D. It is readable from terraform output
 
 <details><summary>Answer and rationale</summary>
 
@@ -1267,8 +1267,8 @@ Write-only arguments are provider-defined inputs used for the current operation 
 
 Every provider argument automatically has a write-only variant in Terraform 1.12.
 
-A. True
-B. False
+A. False
+B. True
 
 <details><summary>Answer and rationale</summary>
 
@@ -1286,10 +1286,10 @@ Providers must explicitly implement write-only arguments. Their availability and
 
 A child module lives in ./modules/network. What source syntax should the root module use?
 
-A. source = "./modules/network"
-B. source = "modules::network"
+A. source = "modules::network"
+B. provider = "./modules/network"
 C. version = "./modules/network"
-D. provider = "./modules/network"
+D. source = "./modules/network"
 
 <details><summary>Answer and rationale</summary>
 
@@ -1305,10 +1305,10 @@ Local module sources use relative paths beginning with ./ or ../.
 
 Which public registry source address identifies the AWS VPC module from the terraform-aws-modules namespace?
 
-A. terraform-aws-modules/vpc/aws
-B. registry.terraform.io/aws/vpc
+A. registry.terraform.io/aws/vpc
+B. github.com/terraform-aws-modules/vpc/aws
 C. hashicorp/aws/vpc
-D. github.com/terraform-aws-modules/vpc/aws
+D. terraform-aws-modules/vpc/aws
 
 <details><summary>Answer and rationale</summary>
 
@@ -1341,10 +1341,10 @@ The module version argument applies to modules installed from a registry. Non-re
 
 A registry module is constrained to ~> 3.2.1. Which release is allowed?
 
-A. 3.2.9
-B. 3.3.0
+A. 3.1.9
+B. 3.2.9
 C. 4.0.0
-D. 3.1.9
+D. 3.3.0
 
 <details><summary>Answer and rationale</summary>
 
@@ -1360,10 +1360,10 @@ D. 3.1.9
 
 A root module needs a child module's subnet_ids output. Which reference is correct?
 
-A. module.network.subnet_ids
-B. network.output.subnet_ids
-C. var.network.subnet_ids
-D. data.module.network.subnet_ids
+A. var.network.subnet_ids
+B. data.module.network.subnet_ids
+C. module.network.subnet_ids
+D. network.output.subnet_ids
 
 <details><summary>Answer and rationale</summary>
 
@@ -1379,8 +1379,8 @@ Child module outputs are referenced as module.<call-name>.<output-name>.
 
 A child module can directly refer to an arbitrary resource in its caller without that value being passed as an input.
 
-A. True
-B. False
+A. False
+B. True
 
 <details><summary>Answer and rationale</summary>
 
@@ -1396,10 +1396,10 @@ Modules have scope boundaries. A child receives values through input variables a
 
 A new remote module call was added to configuration. Which command retrieves it into the working directory?
 
-A. terraform init
-B. terraform validate
-C. terraform output
-D. terraform state pull
+A. terraform validate
+B. terraform state pull
+C. terraform init
+D. terraform output
 
 <details><summary>Answer and rationale</summary>
 
@@ -1415,10 +1415,10 @@ Initialization installs or updates referenced child modules according to the mod
 
 Where does Terraform normally cache downloaded child modules within a working directory?
 
-A. .terraform/modules
-B. .terraform.lock.hcl/modules
-C. terraform.tfstate/modules
-D. modules.lock
+A. terraform.tfstate/modules
+B. modules.lock
+C. .terraform.lock.hcl/modules
+D. .terraform/modules
 
 <details><summary>Answer and rationale</summary>
 
@@ -1436,8 +1436,8 @@ Ten similar application stacks should be instantiated from one module using stab
 
 A. for_each
 B. dynamic
-C. lifecycle
-D. backend
+C. backend
+D. lifecycle
 
 <details><summary>Answer and rationale</summary>
 
@@ -1454,8 +1454,8 @@ Module calls support count or for_each, with stable keys often making for_each p
 A child module should use aws.eu instead of the root's default aws configuration. What belongs on the module call?
 
 A. providers = { aws = aws.eu }
-B. provider = aws.eu
-C. alias = "eu"
+B. alias = "eu"
+C. provider = aws.eu
 D. required_providers = { aws = aws.eu }
 
 <details><summary>Answer and rationale</summary>
@@ -1473,8 +1473,8 @@ The module providers map overrides which root provider configurations satisfy th
 Which elements form a clean module interface?
 
 A. Input variables
-B. Output values
-C. Direct access to caller-local resources
+B. Direct access to caller-local resources
+C. Output values
 D. A backend block required in every child
 
 <details><summary>Answer and rationale</summary>
@@ -1491,10 +1491,10 @@ Inputs and outputs define module boundaries. Child modules should not configure 
 
 A team wants a module discoverable with versioned releases and documentation inside its organization. Which HCP feature fits?
 
-A. Private registry
-B. State locking
-C. Run trigger
-D. Explorer saved view
+A. State locking
+B. Run trigger
+C. Explorer saved view
+D. Private registry
 
 <details><summary>Answer and rationale</summary>
 
@@ -1510,8 +1510,8 @@ The private registry provides organization-scoped modules and providers with ver
 
 A module call can use both count and for_each at the same time.
 
-A. True
-B. False
+A. False
+B. True
 
 <details><summary>Answer and rationale</summary>
 
@@ -1529,9 +1529,9 @@ A module call may use count or for_each, but the two repetition meta-arguments a
 
 What is Terraform state primarily for?
 
-A. Binding resource instances to remote objects and retaining metadata
-B. Storing provider binaries
-C. Replacing configuration files
+A. Replacing configuration files
+B. Binding resource instances to remote objects and retaining metadata
+C. Storing provider binaries
 D. Encrypting every secret
 
 <details><summary>Answer and rationale</summary>
@@ -1548,10 +1548,10 @@ State records object bindings and attributes Terraform needs to plan and apply c
 
 Several engineers run Terraform against the same environment. What is the main benefit of a shared remote backend?
 
-A. Shared current state and, when supported, locking
+A. Provider credential creation
 B. Automatic module versioning
-C. Provider credential creation
-D. Elimination of configuration drift
+C. Elimination of configuration drift
+D. Shared current state and, when supported, locking
 
 <details><summary>Answer and rationale</summary>
 
@@ -1567,8 +1567,8 @@ Remote state centralizes access. Many backends also provide locking, but capabil
 
 Every Terraform backend supports state locking.
 
-A. True
-B. False
+A. False
+B. True
 
 <details><summary>Answer and rationale</summary>
 
@@ -1585,9 +1585,9 @@ Locking behavior depends on backend capabilities. Terraform automatically locks 
 A state lock remains after a crashed run. What should happen before terraform force-unlock is used?
 
 A. Verify no active operation owns the lock and use the exact lock ID
-B. Delete the entire backend
-C. Run apply with -lock=false
-D. Remove .terraform.lock.hcl
+B. Remove .terraform.lock.hcl
+C. Delete the entire backend
+D. Run apply with -lock=false
 
 <details><summary>Answer and rationale</summary>
 
@@ -1622,10 +1622,10 @@ A moved block tells Terraform the old and new addresses so it can update the bin
 
 For an imperative one-time rename of a state address, which command is designed for the task?
 
-A. terraform state mv
-B. terraform state rm
-C. terraform import
-D. terraform fmt
+A. terraform state rm
+B. terraform fmt
+C. terraform state mv
+D. terraform import
 
 <details><summary>Answer and rationale</summary>
 
@@ -1641,10 +1641,10 @@ state mv changes resource addresses in state. moved blocks are the declarative, 
 
 Terraform should stop managing an object but leave the remote object intact. Which configuration construct can express that intent reviewably?
 
-A. removed block with destroy = false
-B. moved block
-C. import block
-D. lifecycle prevent_destroy only
+A. lifecycle prevent_destroy only
+B. removed block with destroy = false
+C. moved block
+D. import block
 
 <details><summary>Answer and rationale</summary>
 
@@ -1660,10 +1660,10 @@ A removed block can remove the object from state without destroying it when its 
 
 What does terraform state rm do to the selected remote object?
 
-A. It forgets the binding but does not destroy the remote object
+A. It imports it under a new address
 B. It destroys it immediately
-C. It imports it under a new address
-D. It only hides it from terraform show
+C. It only hides it from terraform show
+D. It forgets the binding but does not destroy the remote object
 
 <details><summary>Answer and rationale</summary>
 
@@ -1679,10 +1679,10 @@ After state rm, Terraform no longer manages that object. A later plan may propos
 
 An operator changes a security group rule in the cloud console. What usually exposes the difference to Terraform?
 
-A. A refresh performed during plan or apply
-B. terraform fmt
-C. The provider lock file
-D. A module version constraint
+A. terraform fmt
+B. The provider lock file
+C. A module version constraint
+D. A refresh performed during plan or apply
 
 <details><summary>Answer and rationale</summary>
 
@@ -1698,9 +1698,9 @@ Terraform reads remote objects during normal planning and compares refreshed dat
 
 The out-of-band security group change is intentional and configuration will be updated later. Which mode can first record the remote reality in state without changing infrastructure?
 
-A. apply -refresh-only
-B. apply -destroy
-C. state rm
+A. apply -destroy
+B. state rm
+C. apply -refresh-only
 D. init -migrate-state
 
 <details><summary>Answer and rationale</summary>
@@ -1717,8 +1717,8 @@ Refresh-only apply confirms and writes state/output updates based on remote obje
 
 Backend credentials hard-coded in backend configuration can be copied into .terraform metadata and plan files.
 
-A. True
-B. False
+A. False
+B. True
 
 <details><summary>Answer and rationale</summary>
 
@@ -1734,8 +1734,8 @@ HashiCorp recommends environment variables or backend-specific credential mechan
 
 A local backend is changed to S3 and the existing state must remain associated with the same resources. Which command begins migration?
 
-A. terraform init -migrate-state
-B. terraform state push without initialization
+A. terraform state push without initialization
+B. terraform init -migrate-state
 C. terraform apply -replace
 D. terraform providers lock
 
@@ -1753,10 +1753,10 @@ Backend migration is handled during reinitialization with -migrate-state.
 
 Which file should never be confused with state even though its name contains 'lock'?
 
-A. .terraform.lock.hcl
-B. terraform.tfstate
+A. .terraform/environment
+B. .terraform.lock.hcl
 C. terraform.tfstate.backup
-D. .terraform/environment
+D. terraform.tfstate
 
 <details><summary>Answer and rationale</summary>
 
@@ -1772,10 +1772,10 @@ The dependency lock file selects providers. A state lock is a backend coordinati
 
 Why is terraform state push considered dangerous?
 
-A. It can overwrite remote state with a supplied snapshot
+A. It disables locking permanently
 B. It installs untrusted providers
 C. It always destroys resources
-D. It disables locking permanently
+D. It can overwrite remote state with a supplied snapshot
 
 <details><summary>Answer and rationale</summary>
 
@@ -1791,8 +1791,8 @@ state push is a low-level recovery command. Incorrect state can sever or corrupt
 
 A local state file can contain sensitive values even if no output block prints them.
 
-A. True
-B. False
+A. False
+B. True
 
 <details><summary>Answer and rationale</summary>
 
@@ -1808,10 +1808,10 @@ State stores resource attributes needed by Terraform, including values that may 
 
 A configuration uses terraform_remote_state only to read one output from another state. What access risk remains?
 
-A. The reader must be able to access the full state snapshot
-B. The reader can only ever access that single output
-C. Terraform deletes non-output fields
-D. The source state becomes local
+A. Terraform deletes non-output fields
+B. The source state becomes local
+C. The reader must be able to access the full state snapshot
+D. The reader can only ever access that single output
 
 <details><summary>Answer and rationale</summary>
 
@@ -1827,9 +1827,9 @@ Although only root outputs are exposed in expressions, credentials for terraform
 
 Within HCP Terraform, which data source is recommended for sharing outputs without granting full state access?
 
-A. tfe_outputs
+A. external
 B. terraform_remote_state
-C. external
+C. tfe_outputs
 D. http
 
 <details><summary>Answer and rationale</summary>
@@ -1848,9 +1848,9 @@ HashiCorp recommends tfe_outputs because it can provide output access without th
 
 An existing cloud object must become associated with aws_instance.legacy using the imperative CLI workflow. Which command is central?
 
-A. terraform import aws_instance.legacy <remote-id>
+A. terraform apply -replace=aws_instance.legacy
 B. terraform state mv <remote-id> aws_instance.legacy
-C. terraform apply -replace=aws_instance.legacy
+C. terraform import aws_instance.legacy <remote-id>
 D. terraform output aws_instance.legacy
 
 <details><summary>Answer and rationale</summary>
@@ -1885,8 +1885,8 @@ The CLI import command imports into state and expects a destination resource blo
 A reviewable import should be proposed in configuration and executed during apply. Which block expresses it?
 
 A. import
-B. moved
-C. removed
+B. removed
+C. moved
 D. backend
 
 <details><summary>Answer and rationale</summary>
@@ -1904,9 +1904,9 @@ Import blocks make import intent part of configuration and the normal plan/apply
 An import block exists for an object with no resource block. Which plan option can produce a starting resource configuration file?
 
 A. -generate-config-out=PATH
-B. -out=PATH
-C. -json=PATH
-D. -chdir=PATH
+B. -chdir=PATH
+C. -out=PATH
+D. -json=PATH
 
 <details><summary>Answer and rationale</summary>
 
@@ -1941,10 +1941,10 @@ state list prints the addresses of resources in the current state.
 
 Which command displays attributes for one resource instance in state?
 
-A. terraform state show ADDRESS
-B. terraform output ADDRESS
-C. terraform validate ADDRESS
-D. terraform console ADDRESS
+A. terraform validate ADDRESS
+B. terraform state show ADDRESS
+C. terraform console ADDRESS
+D. terraform output ADDRESS
 
 <details><summary>Answer and rationale</summary>
 
@@ -1960,10 +1960,10 @@ state show presents the attributes stored for a single address.
 
 A saved plan file named tfplan needs human-readable inspection. Which command is appropriate?
 
-A. terraform show tfplan
-B. terraform state show tfplan
-C. terraform plan tfplan
-D. terraform output tfplan
+A. terraform output tfplan
+B. terraform show tfplan
+C. terraform state show tfplan
+D. terraform plan tfplan
 
 <details><summary>Answer and rationale</summary>
 
@@ -1996,10 +1996,10 @@ Machine-readable plan/state output includes values needed by tooling and can dis
 
 Terraform CLI debugging must be enabled for one command. Which environment variable controls the core log level?
 
-A. TF_LOG
-B. TF_VAR_LOG
-C. TERRAFORM_DEBUG
-D. TF_STATE_LOG
+A. TF_VAR_LOG
+B. TF_LOG
+C. TF_STATE_LOG
+D. TERRAFORM_DEBUG
 
 <details><summary>Answer and rationale</summary>
 
@@ -2015,10 +2015,10 @@ TF_LOG accepts levels such as TRACE, DEBUG, INFO, WARN, or ERROR. Disable it aft
 
 TF_LOG is set and logs should be written to a file as well as controlled by the logging subsystem. Which variable specifies the path?
 
-A. TF_LOG_PATH
-B. TF_DATA_DIR
-C. TF_CLI_CONFIG_FILE
-D. TF_WORKSPACE
+A. TF_WORKSPACE
+B. TF_LOG_PATH
+C. TF_DATA_DIR
+D. TF_CLI_CONFIG_FILE
 
 <details><summary>Answer and rationale</summary>
 
@@ -2038,8 +2038,8 @@ What does an HCP Terraform workspace normally contain and manage?
 
 A. A collection of infrastructure with its configuration, state, variables, and runs
 B. Only a CLI workspace name
-C. One provider binary
-D. A single resource instance
+C. A single resource instance
+D. One provider binary
 
 <details><summary>Answer and rationale</summary>
 
@@ -2055,8 +2055,8 @@ HCP workspaces separate infrastructure collections and keep the data and run his
 
 HCP Terraform workspaces and Terraform CLI workspaces are the same feature with identical behavior.
 
-A. True
-B. False
+A. False
+B. True
 
 <details><summary>Answer and rationale</summary>
 
@@ -2072,10 +2072,10 @@ They are distinct. HCP workspaces are independently configured infrastructure un
 
 An HCP workspace uses local execution mode. Where do plan and apply execute?
 
-A. On the operator's local machine while HCP stores state
-B. In HCP disposable workers
-C. Inside the private registry
-D. On every team member's machine
+A. Inside the private registry
+B. On every team member's machine
+C. In HCP disposable workers
+D. On the operator's local machine while HCP stores state
 
 <details><summary>Answer and rationale</summary>
 
@@ -2091,10 +2091,10 @@ Local execution mode uses HCP Terraform primarily as a remote state backend. Rem
 
 Which features depend on remote operations rather than local execution mode?
 
-A. Sentinel policy checks
-B. Cost estimation
-C. Run notifications
-D. Local terraform fmt
+A. Cost estimation
+B. Local terraform fmt
+C. Sentinel policy checks
+D. Run notifications
 
 <details><summary>Answer and rationale</summary>
 
@@ -2110,9 +2110,9 @@ HCP run features such as policy checks, cost estimation, and notifications are a
 
 What is the main purpose of an HCP Terraform project?
 
-A. Group workspaces and stacks and scope permissions/settings
-B. Replace every workspace with one state file
-C. Store provider binaries locally
+A. Replace every workspace with one state file
+B. Store provider binaries locally
+C. Group workspaces and stacks and scope permissions/settings
 D. Create CLI aliases
 
 <details><summary>Answer and rationale</summary>
@@ -2129,8 +2129,8 @@ Projects organize workspaces and Stacks and provide an administrative and permis
 
 An HCP Terraform workspace can belong to several projects simultaneously.
 
-A. True
-B. False
+A. False
+B. True
 
 <details><summary>Answer and rationale</summary>
 
@@ -2146,9 +2146,9 @@ Every workspace and Stack belongs to exactly one project.
 
 An organization has not created any projects. Where are new workspaces placed?
 
-A. Default Project
-B. No project
-C. The private registry
+A. No project
+B. The private registry
+C. Default Project
 D. A CLI workspace
 
 <details><summary>Answer and rationale</summary>
@@ -2165,10 +2165,10 @@ Every organization has a Default Project, which cannot be deleted.
 
 The same cloud region and tag values must be shared by 30 workspaces. Which HCP feature is designed for this?
 
-A. Variable set
-B. Run trigger
-C. Explorer view
-D. Change request
+A. Change request
+B. Explorer view
+C. Run trigger
+D. Variable set
 
 <details><summary>Answer and rationale</summary>
 
@@ -2184,10 +2184,10 @@ Variable sets allow reusable Terraform and environment variables to be applied a
 
 A priority variable set and a workspace variable both set region. Which value wins?
 
-A. The priority variable-set value
+A. Whichever was created first
 B. The workspace value
-C. Whichever was created first
-D. Terraform fails with a conflict
+C. Terraform fails with a conflict
+D. The priority variable-set value
 
 <details><summary>Answer and rationale</summary>
 
@@ -2204,9 +2204,9 @@ Priority variable sets override values at more specific scopes, including worksp
 A VCS-connected workspace detects a commit to its configured branch. What workflow can HCP Terraform initiate?
 
 A. Queue a speculative or normal run based on workspace settings
-B. Rewrite the Git history
-C. Publish a provider automatically
-D. Force-unlock every workspace
+B. Publish a provider automatically
+C. Force-unlock every workspace
+D. Rewrite the Git history
 
 <details><summary>Answer and rationale</summary>
 
@@ -2222,10 +2222,10 @@ The VCS-driven workflow connects repository changes to HCP runs, subject to work
 
 Terraform 1.12 configuration should integrate directly with HCP Terraform from the CLI. Which top-level block is intended?
 
-A. cloud
-B. remote_state
-C. hcp
-D. login
+A. remote_state
+B. cloud
+C. login
+D. hcp
 
 <details><summary>Answer and rationale</summary>
 
@@ -2242,9 +2242,9 @@ The cloud block configures CLI integration with HCP Terraform, including organiz
 A local state is being migrated to HCP Terraform. Which preliminary action reduces the risk of concurrent state changes?
 
 A. Stop other Terraform operations before initializing the migration
-B. Delete local state first
-C. Disable locking
-D. Remove all provider constraints
+B. Remove all provider constraints
+C. Delete local state first
+D. Disable locking
 
 <details><summary>Answer and rationale</summary>
 
@@ -2260,10 +2260,10 @@ Migration guidance recommends preventing concurrent runs, authenticating, config
 
 Workspace networking applies successfully. An application workspace should then queue a run. Which feature models this relationship?
 
-A. Run trigger
-B. Variable set
+A. Variable set
+B. Explorer
 C. Private registry
-D. Explorer
+D. Run trigger
 
 <details><summary>Answer and rationale</summary>
 
@@ -2296,10 +2296,10 @@ A successful source apply queues a target run. Auto-application depends on the t
 
 A team wants HCP Terraform runs to obtain short-lived cloud credentials without storing long-lived static keys. Which mechanism fits?
 
-A. Dynamic provider credentials using OIDC
-B. A sensitive workspace variable containing a permanent key
-C. The dependency lock file
-D. terraform_remote_state
+A. A sensitive workspace variable containing a permanent key
+B. Dynamic provider credentials using OIDC
+C. terraform_remote_state
+D. The dependency lock file
 
 <details><summary>Answer and rationale</summary>
 
@@ -2315,9 +2315,9 @@ HCP authenticates a run to the cloud through OIDC and the cloud returns temporar
 
 Security rules must evaluate the proposed plan before apply across selected projects. Which HCP organizational construct attaches those rules?
 
-A. Policy set
+A. Variable set
 B. Run trigger
-C. Variable set
+C. Policy set
 D. Workspace tag only
 
 <details><summary>Answer and rationale</summary>
@@ -2334,10 +2334,10 @@ Policy sets group policy rules and can be attached globally or to selected proje
 
 What is the difference between drift detection and continuous validation in HCP health assessments?
 
-A. Drift detection compares real infrastructure with state; continuous validation evaluates checks against current data
-B. Drift detection formats code; continuous validation installs providers
-C. They are identical labels
-D. Continuous validation changes resources automatically
+A. Drift detection formats code; continuous validation installs providers
+B. They are identical labels
+C. Continuous validation changes resources automatically
+D. Drift detection compares real infrastructure with state; continuous validation evaluates checks against current data
 
 <details><summary>Answer and rationale</summary>
 
@@ -2353,9 +2353,9 @@ Health assessments distinguish state drift from ongoing check-block assertions. 
 
 An administrator needs an organization-wide view of workspaces with drifted state or failed checks. Which feature is designed for this?
 
-A. Explorer
-B. Private registry
-C. Run trigger
+A. Private registry
+B. Run trigger
+C. Explorer
 D. CLI workspace select
 
 <details><summary>Answer and rationale</summary>
@@ -2372,8 +2372,8 @@ Explorer queries and summarizes workspace, module, provider, version, drift, and
 
 An Explorer saved view stores a frozen copy of the current results forever.
 
-A. True
-B. False
+A. False
+B. True
 
 <details><summary>Answer and rationale</summary>
 
@@ -2389,10 +2389,10 @@ A saved view stores the query. Results update as organization data changes.
 
 Remote runs must reach resources accessible only inside a private network. Which HCP capability is commonly used?
 
-A. Terraform agents
-B. CLI workspaces
+A. CLI workspaces
+B. terraform fmt
 C. The public module registry
-D. terraform fmt
+D. Terraform agents
 
 <details><summary>Answer and rationale</summary>
 
