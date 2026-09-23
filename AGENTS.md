@@ -100,7 +100,7 @@ tf-004-prep/
 ├── AGENTS.md
 ├── README.md
 ├── Terraform_Associate_004_12_Day_Plan.md
-├── Terraform_Associate_004_Error_Log.tsv
+├── Terraform_Associate_004_Error_Log.csv
 ├── Terraform_Associate_004_Question_Bank.md
 ├── Terraform_Associate_004_Scenario_Deck.apkg
 └── labs/

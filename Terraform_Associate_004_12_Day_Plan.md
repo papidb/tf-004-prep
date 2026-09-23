@@ -14,7 +14,7 @@ For these 12 days, do not read *Terraform in Action* cover to cover and do not s
 - Raise the new-card limit to at least 30 so Anki does not hide cards assigned for a content day. Keep the review limit high enough to finish every due card.
 - Study only the objective subdeck assigned for that day, then use the parent deck for mixed review from Day 7 onward.
 - Press **Again** if you could not state the governing rule. Press **Hard** if you chose correctly but guessed or could not reject the distractors. Press **Good** only when both the answer and explanation were clear. Reserve **Easy** for rules you can teach from memory.
-- The `.tsv` file is the editable source. Every row contains the answer, rationale, official source, and tags. Edit or suspend a card if official documentation shows that its wording needs correction.
+- The `.csv` file is the editable source. Every row contains the answer, rationale, official source, and tags. Edit or suspend a card if official documentation shows that its wording needs correction.
 - The Markdown question bank contains the same 128 questions with collapsible answers for timed sessions outside Anki.
 
 ## Non-negotiable rules
