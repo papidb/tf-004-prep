@@ -1,5 +1,8 @@
 resource "random_pet" "a" {
-  length = 2
+  length = 4
+  lifecycle {
+    create_before_destroy = true
+  }
 }
 
 resource "random_pet" "b" {
@@ -9,7 +12,10 @@ resource "random_pet" "b" {
   }
 }
 
-resource "random_pet" "b" {
-  length = 2
-  depends_on = [ random_pet.a ]
+resource "random_pet" "c" {
+  length     = 2
+  depends_on = [random_pet.a]
+  lifecycle {
+    prevent_destroy = true
+  }
 }
